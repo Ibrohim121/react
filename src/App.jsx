@@ -1,41 +1,62 @@
 
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import SlugPage from "./assets/slug";
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./components/home";
-import Contact from "./components/contact";
-import Services from "./components/service";
-import NotFound from "./components/notfound";
 
-function About() {
-  return <h1>Bu biz haqimizda sahifa</h1>;
-}
+const mockData = [
+  {
+    id: 1,
+    title: "salom nmadr",
+    slug: "salom nmadr",
+    image: "/src/assets/R.jpg"
+  },
+  {
+    id: 2,
+    title: "salom nmadr",
+    slug: "salom nmadr",
+    image: "/src/assets/W.jpg"
+  },
+  {
+    id: 3,
+    title: "salom nmadr",
+    slug: "salom nmadr",
+    image: "/src/assets/R.jpg"
+  },
+  {
+    id: 4,
+    title: "salom nmadr",
+    slug: "salom nmadr",
+    image: "/src/assets/W.jpg"
+  },
+];
 
 function App() {
   return (
     <Router>
-      <nav>
-        <Link to="/">Bosh sahifa</Link> |{" "}
-        <Link to="/about">Biz haqimizda</Link> |{" "}
-        <Link to="/contact">Aloqa</Link> |{" "}
-        <Link to="/services">Xizmatlar</Link>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <div>
+        <h1>Kurslar Royxati</h1>
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {mockData.map((item) => (
+            <li key={item.id} style={{ marginBottom: "20px" }}>
+              <Link to={`/courses/${item.slug}`}>
+                <img src={item.image} alt={item.title} width="150" />
+                <h3>{item.title}</h3>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <Routes>
+          <Route path="/courses/:slug" element={<SlugPage data={mockData} />} />
+        
+          
+
+        </Routes>
+      </div>
     </Router>
   );
 }
 
-
-
-
-
-export default App; 
-
-
-
+export default App;
 
